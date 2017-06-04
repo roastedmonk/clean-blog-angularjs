@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
-
 <head>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Clean blog - Bootstrap Blog theme with AngularJs">
-    <meta name="author" content="Hunor Madaras">
+    <meta name="description" content="RoastedMonk">
+    <meta name="author" content="Omkar Subramaniam">
 
-    <title>Clean Blog</title>
+    <title ng-bind="page.title">#RoastedMonk</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
@@ -46,17 +45,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" ui-sref="home">Clean Blog</a>
+                <a class="navbar-brand" ui-sref="home">#RoastedMonk</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li ng-class="{active: $state.includes('home')}">
-                        <a ui-sref="home">Home</a>
+                        <a ui-sref="home">Cover</a>
                     </li>
                     <li ng-class="{active: $state.includes('about')}">
-                        <a ui-sref="about">About</a>
+                        <a ui-sref="about">About ME</a>
                     </li>
                     <li ng-class="{active: $state.includes('contact')}">
                         <a ui-sref="contact">Contact</a>
@@ -105,7 +104,7 @@
                             </a>
                         </li>
                     </ul>
-                    <p class="copyright text-muted">Copyright &copy; Your Website {{'' | currentYear}}</p>
+                    <p class="copyright text-muted">Copyright &copy; #RoastedMonk {{'' | currentYear}}</p>
                 </div>
             </div>
         </div>
@@ -124,6 +123,7 @@
     <script src="./js/angular/angular-animate.min.js"></script>
 
     <!-- App -->
+    <script src="./js/PageDetails.js"></script>
     <script src="./js/app/app.js"></script>
 </body>
 </html>

@@ -5,6 +5,13 @@
 	{
 	    $rootScope.$state = $state;
 	    $rootScope.$stateParams = $stateParams;
+
+			$rootScope.page = {};
+			$rootScope.page.title = PageDetails.post.page_title;
+
+			$rootScope.$on('$stateChangeSuccess', function (event, current, previous) {
+				  $rootScope.page.title = current.title;
+			});
 	}]);
 
 	// CONFIGURE OUR ROUTES
@@ -17,31 +24,36 @@
 			.state('home', {
 				url: '/',
 				templateUrl : 'pages/home.html',
-				controller: 'mainController'
+				controller: 'mainController',
+        title: PageDetails.post.page_title
 			})
 
 			.state('about', {
 				url: '/about',
 				templateUrl : 'pages/page.html',
-				controller: 'aboutController'
+				controller: 'aboutController',
+        title: PageDetails.post.page_title +' - '  + PageDetails.about.page_title
 			})
 
 			.state('contact', {
 				url: '/contact',
 				templateUrl : 'pages/contact.html',
-				controller: 'contactController'
+				controller: 'contactController',
+        title: PageDetails.post.page_title +' - '  + PageDetails.contact.page_title
 			})
 
 			.state('post', {
 				url: '/post/{id}/{slug}',
 				templateUrl: 'pages/post.html',
-				controller: 'postController'
+				controller: 'postController',
+        title: PageDetails.post.page_title
 			})
 
 			.state('pager', {
 				url: '/page/{id}',
 				templateUrl : 'pages/home.html',
-				controller  : 'mainController'
+				controller  : 'mainController',
+        title: PageDetails.post.page_title
 			})
 
 		$locationProvider.html5Mode(true);
@@ -84,8 +96,8 @@
 	app.controller('mainController', function($scope, $http, $sce, $timeout, $stateParams)
 	{
 
-		$scope.page_title = 'Clean Blog';
-		$scope.page_subtitle = 'A Clean Blog Theme by Start Bootstrap';
+	  $scope.page_title = PageDetails.post.page_title;
+		$scope.page_subtitle = PageDetails.post.page_subtitle;
 
 		$scope.date = new Date();
 
@@ -142,7 +154,7 @@
 	// POST CONTROLLER
 	app.controller('postController', function($scope, $http, $state, $stateParams)
 	{
-		$scope.page_title = 'About Me';
+		$scope.page_title = PageDetails.about.page_title;
 
 		if($stateParams.id == undefined) {
 			$state.go('home');
@@ -174,9 +186,8 @@
 	// ABOUT CONTROLLER
 	app.controller('aboutController', function($scope,$http)
 	{
-		$scope.page_title = 'About Me';
-		$scope.page_subtitle = 'This is what I do.';
-
+		$scope.page_title = PageDetails.about.page_title;
+		$scope.page_subtitle = PageDetails.about.page_subtitle;
 	});
 
 	// Show errors on the Contact page
@@ -269,8 +280,8 @@
 	// CONTACT CONTROLLER
 	app.controller('contactController', function($scope, $http)
 	{
-		$scope.page_title = 'Contact Me';
-		$scope.page_subtitle = 'Have questions? I have answers (maybe).';
+		$scope.page_title = PageDetails.contact.page_title;
+		$scope.page_subtitle = PageDetails.contact.page_subtitle;
 
 		$scope.phone_number = /^[0-9]+$/;
 		$scope.email = /^[a-z0-9!#$%&'*+/=?^_`{|}~.-]+@[a-z0-9-]+(\.[a-z0-9-]+)*$/i;
