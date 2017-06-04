@@ -54,6 +54,23 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 	$locationProvider.html5Mode(true);
 });
 
+app.directive('btnAutoCollapse', directive);
+
+function directive() {
+	var dir = {
+		restrict: 'A',
+		scope: {},
+		link: link
+	};
+	return dir;
+
+	function link(scope, element, attrs) {
+		element.on('click', function (event) {
+			$(".navbar-collapse.in").collapse('hide');
+		});
+	}
+}
+
 // Posts Pagination
 app.directive('postsPagination', function () {
 	return {

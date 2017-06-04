@@ -1,7 +1,7 @@
 var PageDetails = {
     blog_home:"#RoastedMonk",
     post:{
-        page_title : "#RoastedMonk",
+        page_title : "#Roasted Monk",
         page_subtitle : "A Blog from thoughts of #RoastedMonk"
     },
     about : {
