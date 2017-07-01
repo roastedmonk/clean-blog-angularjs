@@ -162,7 +162,7 @@ app.controller('mainController', function ($scope, $http, $sce, $timeout, $state
 app.controller('postController', function ($scope, $http, $state, $stateParams) {
 	$scope.page_title = PageDetails.about.page_title;
 
-	if ($stateParams.id == undefined) {
+	if ($stateParams.postMan.id == undefined) {
 		$state.go('home');
 	}
 
@@ -176,16 +176,21 @@ app.controller('postController', function ($scope, $http, $state, $stateParams) 
 		}
 	};
 
-	post_id = $stateParams.id;
+	post_id = $stateParams.postMan.id;
+	$scope.post_id = $stateParams.postMan.id;
+	$scope.post_date = $stateParams.postMan.post_date;
+	$scope.post_title = $stateParams.postMan.post_title;
+	$scope.post_author = $stateParams.postMan.author.firstname + ' ' + $stateParams.postMan.author.lastname;
+	$scope.post_content = $stateParams.postMan.post_content;
 
 	// $http.get('http://laravel.dev/api/post/'+post_id).success(function(response) {
-	$http.get('json/post.json').success(function (response) {
+	/*$http.get('json/post.json').success(function (response) {
 		$scope.post_id = response.id;
 		$scope.post_date = response.post_date;
 		$scope.post_title = response.post_title;
 		$scope.post_author = response.author.firstname + ' ' + response.author.lastname;
 		$scope.post_content = response.post_content;
-	});
+	});*/
 });
 
 // ABOUT CONTROLLER
