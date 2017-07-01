@@ -32,7 +32,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
 		.state('about', {
 			url: '/about',
-			templateUrl: 'pages/page.html?v='+PageDetails.version_number,
+			templateUrl: 'pages/about.html?v='+PageDetails.version_number,
 			controller: 'aboutController',
 			title: PageDetails.post.page_title + ' - ' + PageDetails.about.page_title
 		})
