@@ -38,7 +38,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 		})
 
 		.state('post', {
-			url: '/post/:id/:post_slug',
+			url: '/post/{id}/{slug}',
 			templateUrl: 'pages/post.html?v='+PageDetails.version_number,
 			controller: 'postController',
 			title: PageDetails.post.page_title
