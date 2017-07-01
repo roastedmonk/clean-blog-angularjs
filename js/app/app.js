@@ -139,7 +139,7 @@ app.controller('mainController', function ($scope, $http, $sce, $timeout, $state
 
 		$scope.loading = true;
 
-		$http.get('json/posts-page-' + pageNumber + '.json').success(function (response) {
+		$http.get('json/posts-page-' + pageNumber + '.json?v='+PageDetails.version_number).success(function (response) {
 			$scope.posts = response.data;
 			$scope.totalPages = response.last_page;
 			$scope.currentPage = response.current_page;
@@ -184,7 +184,7 @@ app.controller('postController', function ($scope, $http, $state, $stateParams) 
 	$scope.post_content = $stateParams.postMan.post_content;
 
 	// $http.get('http://laravel.dev/api/post/'+post_id).success(function(response) {
-	/*$http.get('json/post.json').success(function (response) {
+	/*$http.get('json/post.json?v='+PageDetails.version_number).success(function (response) {
 		$scope.post_id = response.id;
 		$scope.post_date = response.post_date;
 		$scope.post_title = response.post_title;
