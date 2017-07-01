@@ -6,7 +6,7 @@ var PageDetails = {
     },
     about : {
         page_title : 'About Me',
-        page_subtitle : 'My Resume'
+        page_subtitle : 'Mein koun hoon (Hindi - Indian Language)'
     },
     contact : {
         page_title:'Contact Me',
