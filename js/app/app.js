@@ -41,7 +41,10 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 			url: '/post/{id}/{slug}',
 			templateUrl: 'pages/post.html?v='+PageDetails.version_number,
 			controller: 'postController',
-			title: PageDetails.post.page_title
+			title: PageDetails.post.page_title,
+			params: {
+				postMan: null
+			}
 		})
 
 		.state('pager', {
