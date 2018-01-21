@@ -19,5 +19,5 @@ var PageDetails = {
     profile_image: "./img/me.jpg",
     profile_name:"Omkar Subramaniam",
 
-    version_number: 1000005
+    version_number: 1000007
 }

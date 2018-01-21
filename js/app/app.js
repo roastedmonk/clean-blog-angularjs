@@ -1,5 +1,11 @@
+
+var underscore = angular.module('underscore', []);
+underscore.factory('_', ['$window', function($window) {
+  return $window._; // assumes underscore has already been loaded on the page
+}]);
+
 // CREATE THE MODULE AND NAME IT cleanBlog
-var app = angular.module("app", ["ngAnimate", "ui.router", "ngSanitize",]);
+var app = angular.module("app", ["ngAnimate", "ui.router", "ngSanitize", "underscore"]);
 
 app.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
 	$rootScope.$state = $state;
@@ -38,13 +44,10 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 		})
 
 		.state('post', {
-			url: '/post/{id}/{slug}',
+			url: '/post/{pgnumber}/{id}/{slug}',
 			templateUrl: 'pages/post.html?v='+PageDetails.version_number,
 			controller: 'postController',
-			title: PageDetails.post.page_title,
-			params: {
-				postMan: null
-			}
+			title: PageDetails.post.page_title			
 		})
 
 		.state('pager', {
@@ -54,7 +57,7 @@ app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
 			title: PageDetails.post.page_title
 		})
 
-	$locationProvider.html5Mode(true);
+	//$locationProvider.html5Mode(true);
 });
 
 app.directive('btnAutoCollapse', directive);
@@ -162,10 +165,10 @@ app.controller('mainController', function ($scope, $http, $sce, $timeout, $state
 });
 
 // POST CONTROLLER
-app.controller('postController', function ($scope, $http, $state, $stateParams) {
+app.controller('postController', function ($scope, $http, $state, $stateParams, _) {
 	$scope.page_title = PageDetails.about.page_title;
 
-	if ($stateParams.postMan.id == undefined) {
+	if ($stateParams.id == undefined) {
 		$state.go('home');
 	}
 
@@ -179,21 +182,22 @@ app.controller('postController', function ($scope, $http, $state, $stateParams) 
 		}
 	};
 
-	post_id = $stateParams.postMan.id;
-	$scope.post_id = $stateParams.postMan.id;
-	$scope.post_date = $stateParams.postMan.post_date;
-	$scope.post_title = $stateParams.postMan.post_title;
-	$scope.post_author = $stateParams.postMan.author.firstname + ' ' + $stateParams.postMan.author.lastname;
-	$scope.post_content = $stateParams.postMan.post_content;
+	post_id = $stateParams.id;
+	_pageNumber = $stateParams.pgnumber;
 
-	// $http.get('http://laravel.dev/api/post/'+post_id).success(function(response) {
-	/*$http.get('json/post.json?v='+PageDetails.version_number).success(function (response) {
-		$scope.post_id = response.id;
-		$scope.post_date = response.post_date;
-		$scope.post_title = response.post_title;
-		$scope.post_author = response.author.firstname + ' ' + response.author.lastname;
-		$scope.post_content = response.post_content;
-	});*/
+	$http.get('json/posts-page-' + _pageNumber + '.json?v='+PageDetails.version_number).success(function (response) {
+		var lPosts = response.data;
+		var postMan = _.find(lPosts, function(goal) {
+			return goal.id == post_id;
+		});
+		if(postMan){
+			$scope.post_id = postMan.id;
+			$scope.post_date = postMan.post_date;
+			$scope.post_title =postMan.post_title;
+			$scope.post_author = postMan.author.firstname + ' ' + postMan.author.lastname;
+			$scope.post_content = postMan.post_content;
+		}
+	});
 });
 
 // ABOUT CONTROLLER
